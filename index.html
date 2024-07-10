@@ -1,0 +1,75 @@
+<!-- Main container -->
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+    
+    <!-- Header Section -->
+    <header class="w-full max-w-4xl text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800">Welcome to TweetBot!</h1>
+        <p class="mt-4 text-lg text-gray-600">Your friendly Twitter bot that keeps you updated with the latest tweets on any topic!</p>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 md:flex md:items-center md:justify-between mb-12">
+        <img src="https://placehold.co/300x200" alt="Twitter bot illustration" class="rounded-lg mx-auto md:mx-0 md:mr-6">
+        <div class="mt-6 md:mt-0">
+            <h2 class="text-2xl font-semibold text-gray-800">Stay Updated with TweetBot</h2>
+            <p class="mt-4 text-gray-600">Follow live streams, trending topics, and your favorite accounts effortlessly.</p>
+            <a href="#get-started" class="inline-block mt-6 bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600">Get Started</a>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <!-- Feature 1 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <img src="https://placehold.co/100x100" alt="Feature 1" class="mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Real-time Updates</h3>
+            <p class="mt-2 text-gray-600">Never miss a tweet. Get real-time updates on the latest trends.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <img src="https://placehold.co/100x100" alt="Feature 2" class="mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Easy Integration</h3>
+            <p class="mt-2 text-gray-600">Integrate with your existing tools and workflows easily.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <img src="https://placehold.co/100x100" alt="Feature 3" class="mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Customizable Alerts</h3>
+            <p class="mt-2 text-gray-600">Set custom alerts and get notifications tailored to your preferences.</p>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section id="get-started" class="w-full max-w-4xl bg-blue-500 text-white text-center py-12 rounded-lg">
+        <h2 class="text-3xl font-bold">Get Started with TweetBot Today</h2>
+        <p class="mt-4 text-lg">Join thousands of users hooking into live updates from Twitter.</p>
+        <a href="#contact" class="inline-block mt-6 bg-white text-blue-500 font-medium py-2 px-4 rounded hover:bg-gray-100">Contact Us</a>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer id="contact" class="w-full max-w-4xl text-center mt-12">
+        <p class="text-gray-600">&copy; 2023 TweetBot. All rights reserved. <a href="mailto:support@tweetbot.com" class="text-blue-500 underline">support@tweetbot.com</a></p>
+    </footer>
+</div>
+```
+
+### Instructions and Understanding
+1. **Including Tailwind CSS**
+   - Ensure Tailwind CSS is included in your project. If not, add the following in your `<head>` section:
+     ```html
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+     ```
+
+2. **Placeholder Images**
+   - The images use placeholder URLs from `placehold.co` and can be replaced with actual images.
+
+3. **Scroll Behavior**
+   - Ensure smooth scrolling in your CSS:
+     ```css
+     html {
+       scroll-behavior: smooth;
+     }
+     ```
+
+4. **Responsive Design**
+   - The layout is responsive and should adjust correctly across desktop, tablet, and mobile devices.
