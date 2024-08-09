@@ -1,0 +1,20 @@
+{
+  "name": "twitter-stx-bot",
+  "version": "1.0.0",
+  "description": "Twitter STX Tipping Bot",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "build": "npm install"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.1.1",
+    "dotenv": "^16.0.3",
+    "twitter-api-v2": "^1.13.0",
+    "@stacks/network": "^4.3.0",
+    "@stacks/transactions": "^4.3.0",
+    "@stacks/wallet-sdk": "^4.3.0"
+  },
+  "author": "NoCodeClarity",
+  "license": "MIT"
+}
