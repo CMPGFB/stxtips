@@ -2,7 +2,7 @@ require('dotenv').config();
 const { TwitterApi } = require('twitter-api-v2');
 const { createClient } = require('@supabase/supabase-js');
 const { StacksTestnet, StacksMainnet } = require('@stacks/network');
-const { makeSTXTokenTransfer } = require('@stacks/transactions');
+const { contractCall, uintCV, principalCV } = require('@stacks/transactions');
 const { mnemonicToSeed } = require('@stacks/wallet-sdk');
 const { createStacksPrivateKey } = require('@stacks/transactions');
 
@@ -48,17 +48,24 @@ async function getWalletAddressForTwitterUser(twitterHandle) {
 
 async function sendTip(recipientAddress, amount) {
   try {
+    const functionName = 'tip-stx';
+    const contractAddress = process.env.CONTRACT_ADDRESS;
+    const contractName = process.env.CONTRACT_NAME;
+
     const txOptions = {
-      recipient: recipientAddress,
-      amount: amount * 1000000, // convert to microSTX
+      contractAddress: contractAddress,
+      contractName: contractName,
+      functionName: functionName,
+      functionArgs: [
+        principalCV(recipientAddress),
+        uintCV(amount * 1000000)  // Convert to microSTX
+      ],
       senderKey: privateKey,
       network: network,
-      memo: 'Twitter tip',
-      anchorMode: 1, // AnchorMode.Any
-      fee: 3000, // adjust as needed
+      postConditionMode: 1,
     };
 
-    const transaction = await makeSTXTokenTransfer(txOptions);
+    const transaction = await contractCall(txOptions);
     const broadcastResponse = await network.broadcastTransaction(transaction);
     console.log('Transaction broadcast successfully', broadcastResponse);
     return broadcastResponse;

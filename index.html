@@ -1,70 +1,95 @@
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter STX Tipping Bot</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@stacks/connect@latest"></script>
+</head>
+<body>
+  <header>
+    <h1>STX Twitter Bot</h1>
+    <p>Send and receive STX tips via Twitter replies!</p>
+  </header>
 
-<center>
+  <section>
+    <h2>Sign In with Xverse or Leather</h2>
+    <p>Connect your Stacks wallet to get started with tipping.</p>
+    <input type="text" id="twitter-handle" placeholder="Enter your Twitter handle">
+    <button id="connect-wallet">Sign In with Xverse or Leather</button>
+  </section>
 
-<!-- Main container -->
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-    
-    <!-- Header Section -->
-    <header class="w-full max-w-4xl text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800">Welcome to STX TipBot!</h1>
-        <p class="mt-4 text-lg text-gray-600">Your friendly Twitter bot for tipping STX and SIP-10 tokens!</p>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 md:flex md:items-center md:justify-between mb-12">
-        <img src="https://placehold.co/300x200" alt="STX TipBot illustration" class="rounded-lg mx-auto md:mx-0 md:mr-6">
-        <div class="mt-6 md:mt-0">
-            <h2 class="text-2xl font-semibold text-gray-800">Tip with Ease using STX TipBot</h2>
-            <p class="mt-4 text-gray-600">Send STX or SIP-10 tokens to your favorite Twitter users effortlessly.</p>
-            <a href="#get-started" class="inline-block mt-6 bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600">Get Started</a>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <!-- Feature 1 -->
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-            <img src="https://placehold.co/100x100" alt="Feature 1" class="mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Easy Tipping</h3>
-            <p class="mt-2 text-gray-600">Tip STX or SIP-10 tokens with a simple Twitter command.</p>
-        </div>
-        <!-- Feature 2 -->
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-            <img src="https://placehold.co/100x100" alt="Feature 2" class="mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Secure Transfers</h3>
-            <p class="mt-2 text-gray-600">Your transfers are secured by the Stacks blockchain.</p>
-        </div>
-        <!-- Feature 3 -->
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-            <img src="https://placehold.co/100x100" alt="Feature 3" class="mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Multiple Tokens</h3>
-            <p class="mt-2 text-gray-600">Support for STX and other SIP-10 tokens.</p>
-        </div>
-    </section>
-    
-    <!-- How It Works Section -->
-    <section class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 mb-12">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">How It Works</h2>
-        <ol class="list-decimal list-inside space-y-2 text-gray-600">
-            <li>Tag a user on Twitter and use the tip command (e.g., @user @stxtipbot tip 10 STX)</li>
-            <li>Our bot will reply asking for your wallet address</li>
-            <li>Reply to the bot with your wallet address</li>
-            <li>The bot will process the transfer on the Stacks blockchain</li>
-            <li>Once confirmed, both tipper and recipient will receive a confirmation tweet</li>
-        </ol>
-    </section>
-    
-    <!-- Call to Action Section -->
-    <section id="get-started" class="w-full max-w-4xl bg-blue-500 text-white text-center py-12 rounded-lg">
-        <h2 class="text-3xl font-bold">Start Tipping with STX TipBot Today</h2>
-        <p class="mt-4 text-lg">Join the Stacks community in rewarding great content on Twitter.</p>
-        <a href="#contact" class="inline-block mt-6 bg-white text-blue-500 font-medium py-2 px-4 rounded hover:bg-gray-100">Contact Us</a>
-    </section>
-    
-    <!-- Footer Section -->
-    <footer id="contact" class="w-full max-w-4xl text-center mt-12">
-        <p class="text-gray-600">Inspired by the NoCodeDevs in the community of <a href="https://twitter.com/nocodeclarity" class="text-blue-500 underline">NoCodeClarity</a></p>
-    </footer> 
-</div>
-</center>
+  <section>
+    <h2>Features</h2>
+    <ul>
+      <li>Wallet onboarding system for users to create and link their Stacks wallets</li>
+      <li>Streamlined tipping process that automatically identifies the user's wallet</li>
+      <li>Automatic tweet responses confirming successful transactions</li>
+      <li>Error handling for invalid commands or failed transactions</li>
+      <li>Integration with Supabase for transaction history storage</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <p>To send a tip, simply reply to a tweet with the bot mentioned and include the amount of STX you want to send. For example, "10 STX". The bot will handle the rest and send a confirmation tweet.</p>
+  </section>
+
+  <section>
+    <h2>Get Started</h2>
+    <p>Follow the instructions in the <a href="README.md">README</a> to deploy your own Twitter STX Tipping Bot.</p>
+  </section>
+
+  <footer>
+    <p>Created by NoCodeClarity</p>
+    <p>Licensed under the MIT License</p>
+  </footer>
+
+  <script>
+    const connectWalletButton = document.getElementById('connect-wallet');
+
+    connectWalletButton.addEventListener('click', () => {
+      const twitterHandle = document.getElementById('twitter-handle').value;
+
+      if (!twitterHandle) {
+        alert('Please enter your Twitter handle.');
+        return;
+      }
+
+      const appConfig = new StacksConnect({
+        appDetails: {
+          name: 'Twitter STX Tipping Bot',
+          icon: 'https://example.com/icon.png',
+        },
+        redirectTo: '/',
+        userSession: new UserSession({ appConfig: new AppConfig(['store_write', 'publish_data']) }),
+      });
+
+      appConfig.authenticate({
+        onFinish: (authResponse) => {
+          const userSession = new UserSession();
+          const userData = userSession.loadUserData();
+          const walletAddress = userData.profile.stxAddress.testnet; // Use .mainnet for mainnet
+          alert(`Wallet connected: ${walletAddress}`);
+
+          // Send wallet address and Twitter handle to your backend or Supabase
+          fetch('/api/save-wallet', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ walletAddress, twitterHandle })
+          }).then(response => {
+            if (response.ok) {
+              console.log('Wallet address saved successfully.');
+              alert('Your wallet has been successfully linked to your Twitter handle!');
+            } else {
+              console.error('Failed to save wallet address.');
+              alert('Failed to link wallet. Please try again.');
+            }
+          });
+        },
+      });
+    });
+  </script>
+</body>
+</html>
