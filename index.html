@@ -4,22 +4,129 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>STX Tips</title>
-  <link rel="stylesheet" href="/styles.css">
-  <script src="https://unpkg.com/@stacks/connect@latest"></script>
+  <script src="https://unpkg.com/@stacks/connect"></script>
+  <style>
+    :root {
+      --primary-color: #5546FF;
+      --secondary-color: #FFA500;
+      --background-color: #f0f4f8;
+      --text-color: #333;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 0.5rem;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    li::before {
+      content: '•';
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -0.2rem;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #e69500;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>STX Tips</h1>
     <p>Send and receive STX tips via Twitter replies!</p>
   </header>
-
   <section>
     <h2>Sign In</h2>
     <p>Connect your Stacks wallet to get started with tipping.</p>
     <input type="text" id="twitter-handle" placeholder="Enter your Twitter handle">
     <button id="connect-wallet">Sign in with Xverse/Leather</button>
   </section>
-
   <section>
     <h2>Features</h2>
     <ul>
@@ -30,70 +137,63 @@
       <li>Integration with Supabase for transaction history storage</li>
     </ul>
   </section>
-
   <section>
     <h2>How It Works</h2>
     <p>To send a tip, simply reply to a tweet with the bot mentioned and include the amount of STX you want to send. For example, "10 STX". The bot will handle the rest and send a confirmation tweet.</p>
   </section>
-
   <section>
     <h2>Get Started</h2>
     <p>Follow the instructions in the <a href="https://github.com/CMPGFB/twitterbot/blob/main/README.md" target="_blank">README</a> to deploy your own Twitter STX Tipping Bot.</p>
   </section>
-
   <footer>
     <p>Created by NoCodeClarity</p>
     <p>Licensed under the MIT License</p>
   </footer>
-
+  
   <script>
-    const connectWalletButton = document.getElementById('connect-wallet');
+    document.addEventListener('DOMContentLoaded', function() {
+        const connectWalletButton = document.getElementById('connect-wallet');
+        const appConfig = new AppConfig(['store_write', 'publish_data']);
+        const userSession = new UserSession({ appConfig });
 
-    connectWalletButton.addEventListener('click', () => {
-      const twitterHandle = document.getElementById('twitter-handle').value;
-      if (!twitterHandle) {
-        alert('Please enter your Twitter handle.');
-        return;
-      }
-
-      const verificationCode = generateVerificationCode();
-
-      const appConfig = new StacksConnect({
-        appDetails: {
-          name: 'STX Tips (Powered By NoCodeClarity)',
-          icon: 'https://github.com/CMPGFB/twitterbot/blob/main/Stacks%20Logo%20png.png',
-        },
-        redirectTo: '/',
-        userSession: new UserSession({ appConfig: new AppConfig(['store_write', 'publish_data']) }),
-      });
-
-      appConfig.authenticate({
-        onFinish: (authResponse) => {
-          const userSession = new UserSession();
-          const userData = userSession.loadUserData();
-          const walletAddress = userData.profile.stxAddress.testnet; // Use .mainnet for mainnet
-          alert(`Wallet connected: ${walletAddress}`);
-
-          // Send wallet address, Twitter handle, and verification code to your backend
-          fetch('/api/save-wallet', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ walletAddress, twitterHandle, verificationCode })
-          }).then(response => {
-            if (response.ok) {
-              alert(`Please tweet the following code from your Twitter account to verify your wallet: ${verificationCode}`);
-            } else {
-              console.error('Failed to save wallet address.');
-              alert('Failed to link wallet. Please try again.');
+        connectWalletButton.addEventListener('click', () => {
+            const twitterHandle = document.getElementById('twitter-handle').value;
+            if (!twitterHandle) {
+                alert('Please enter your Twitter handle.');
+                return;
             }
-          });
-        },
-      });
-    });
 
-    function generateVerificationCode() {
-      return Math.random().toString(36).substr(2, 8);
-    }
+            const appDetails = {
+                name: 'STX Tips (Powered By NoCodeClarity)',
+                icon: 'https://raw.githubusercontent.com/CMPGFB/twitterbot/main/NCC%20Logo.png',
+            };
+
+            showConnect({
+                appDetails,
+                redirectTo: '/',
+                onFinish: ({ userSession }) => {
+                    const userData = userSession.loadUserData();
+                    const walletAddress = userData.profile.stxAddress.testnet; // Use .mainnet for mainnet
+                    alert(`Wallet connected: ${walletAddress}`);
+                    
+                    // Send wallet address and Twitter handle to your backend
+                    fetch('/api/save-wallet', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ walletAddress, twitterHandle })
+                    }).then(response => {
+                        if (response.ok) {
+                            alert('Wallet linked successfully!');
+                        } else {
+                            console.error('Failed to save wallet address.');
+                            alert('Failed to link wallet. Please try again.');
+                        }
+                    });
+                },
+                userSession, // this is the userSession we created earlier
+            });
+        });
+    });
   </script>
 </body>
 </html>
