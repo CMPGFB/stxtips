@@ -2,23 +2,21 @@
     "version": 2,
     "builds": [
       {
+        "src": "index.html",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "styles.css",
+        "use": "@vercel/static"
+      },
+      {
         "src": "src/*.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
-      {
-        "src": "/api/save-wallet",
-        "dest": "/src/save-wallet.js"
-      },
-      {
-        "src": "/api/verify-twitter",
-        "dest": "/src/verify-twitter.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
+      { "src": "/api/(.*)", "dest": "/src/$1.js" },
+      { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
   
