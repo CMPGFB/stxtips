@@ -4,16 +4,16 @@ const supabase = require('./supabase.js');
 
 module.exports = async (req, res) => {
   if (req.method === 'POST') {
-    const { walletAddress, twitterHandle } = req.body;
+    const { walletAddress, twitterHandle, verificationCode } = req.body;
 
-    if (!walletAddress || !twitterHandle) {
-      return res.status(400).send('Wallet address and Twitter handle are required');
+    if (!walletAddress || !twitterHandle || !verificationCode) {
+      return res.status(400).send('Wallet address, Twitter handle, and verification code are required');
     }
 
-    // Save or update the wallet address linked to the Twitter handle
-    const { data, error } = await supabase
+    // Save wallet address, Twitter handle, and verification code in Supabase
+    const { error } = await supabase
       .from('wallet_links')
-      .upsert({ stacks_address: walletAddress, twitter_handle: twitterHandle }, { onConflict: ['twitter_handle'] });
+      .insert([{ stacks_address: walletAddress, twitter_handle: twitterHandle, verification_code: verificationCode, verified: false }]);
 
     if (error) {
       return res.status(500).send('Error saving wallet address');

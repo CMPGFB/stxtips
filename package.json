@@ -1,7 +1,7 @@
 {
   "name": "stx-twitter-bot",
   "version": "1.0.0",
-  "description": "Twitter STX Tipping Bot",
+  "description": "STX Tipping Bot for Twitter / X",
   "main": "src/bot.js",
   "scripts": {
     "start": "node src/bot.js",

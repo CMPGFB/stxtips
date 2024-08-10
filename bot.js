@@ -34,12 +34,12 @@ async function initializePrivateKey() {
 async function getWalletAddressForTwitterUser(twitterHandle) {
   const { data, error } = await supabase
     .from('wallet_links')
-    .select('stacks_address')
+    .select('stacks_address, verified')
     .eq('twitter_handle', twitterHandle)
     .single();
 
-  if (error) {
-    console.error('Error fetching wallet address:', error);
+  if (error || !data.verified) {
+    console.error('Error fetching wallet address or account not verified:', error);
     return null;
   }
 
@@ -78,7 +78,7 @@ async function sendTip(recipientAddress, amount) {
 async function processTip(senderHandle, recipientHandle, amount, tweetId) {
   const recipientAddress = await getWalletAddressForTwitterUser(recipientHandle);
   if (!recipientAddress) {
-    await twitterClient.v2.reply(`@${recipientHandle} hasn't linked a Stacks wallet yet. They need to link their wallet to receive tips.`, tweetId);
+    await twitterClient.v2.reply(`@${recipientHandle} hasn't verified their wallet yet. They need to verify their wallet to receive tips.`, tweetId);
     return;
   }
 

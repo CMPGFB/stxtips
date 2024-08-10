@@ -9,15 +9,15 @@
 </head>
 <body>
   <header>
-    <h1>STX Twitter Bot</h1>
+    <h1>STX Tips</h1>
     <p>Send and receive STX tips via Twitter replies!</p>
   </header>
 
   <section>
-    <h2>Sign In with Xverse or Leather</h2>
+    <h2>Sign In</h2>
     <p>Connect your Stacks wallet to get started with tipping.</p>
     <input type="text" id="twitter-handle" placeholder="Enter your Twitter handle">
-    <button id="connect-wallet">Sign In with Xverse or Leather</button>
+    <button id="connect-wallet">Sign in with Xverse/Leather</button>
   </section>
 
   <section>
@@ -51,16 +51,17 @@
 
     connectWalletButton.addEventListener('click', () => {
       const twitterHandle = document.getElementById('twitter-handle').value;
-
       if (!twitterHandle) {
         alert('Please enter your Twitter handle.');
         return;
       }
 
+      const verificationCode = generateVerificationCode();
+
       const appConfig = new StacksConnect({
         appDetails: {
-          name: 'STX Twitter Bot',
-          icon: 'https://github.com/CMPGFB/twitterbot/blob/157dbe0c205e0fc806148bf1356849a1c41b4b0e/NCC%20Logo.png',
+          name: 'STX Tips (Powered By NoCodeClarity)',
+          icon: 'https://github.com/CMPGFB/twitterbot/blob/157dbe0c205e0fc806148bf1356849a1c41b4b0e/NCC%20Logo.png',  
         },
         redirectTo: '/',
         userSession: new UserSession({ appConfig: new AppConfig(['store_write', 'publish_data']) }),
@@ -73,15 +74,14 @@
           const walletAddress = userData.profile.stxAddress.testnet; // Use .mainnet for mainnet
           alert(`Wallet connected: ${walletAddress}`);
 
-          // Send wallet address and Twitter handle to your backend or Supabase
+          // Send wallet address, Twitter handle, and verification code to your backend
           fetch('/api/save-wallet', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ walletAddress, twitterHandle })
+            body: JSON.stringify({ walletAddress, twitterHandle, verificationCode })
           }).then(response => {
             if (response.ok) {
-              console.log('Wallet address saved successfully.');
-              alert('Your wallet has been successfully linked to your Twitter handle!');
+              alert(`Please tweet the following code from your Twitter account to verify your wallet: ${verificationCode}`);
             } else {
               console.error('Failed to save wallet address.');
               alert('Failed to link wallet. Please try again.');
@@ -90,6 +90,10 @@
         },
       });
     });
+
+    function generateVerificationCode() {
+      return Math.random().toString(36).substr(2, 8);
+    }
   </script>
 </body>
 </html>

@@ -12,6 +12,10 @@
         "dest": "/src/save-wallet.js"
       },
       {
+        "src": "/api/verify-twitter",
+        "dest": "/src/verify-twitter.js"
+      },
+      {
         "src": "/(.*)",
         "dest": "/index.html"
       }
