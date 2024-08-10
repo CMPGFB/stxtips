@@ -1,10 +1,6 @@
-Here’s the updated README in a similar format based on the changes we made:
+# STX Tips Bot
 
----
-
-# STX Twitter Bot
-
-**STX Twitter Bot** enables users to send and receive STX (Stacks) tips via Twitter replies by interacting with a secure Clarity smart contract on the Stacks blockchain. Users can connect their Stacks wallets directly through the landing page, simplifying the process of sending tips.
+**STX Tips** enables users to send and receive STX (Stacks) tips via Twitter replies by interacting with a secure Clarity smart contract on the Stacks blockchain. Users can connect their Stacks wallets directly through the landing page, simplifying the process of sending tips. The URL is https://x.com/STXTipBot.
 
 ## Features
 
