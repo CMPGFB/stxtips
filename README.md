@@ -1,6 +1,8 @@
 # STX Tips Bot
 
-**STX Tips** enables users to send and receive STX (Stacks) tips via Twitter replies by interacting with a secure Clarity smart contract on the Stacks blockchain. Users can connect their Stacks wallets directly through the landing page, simplifying the process of sending tips. This is an active work in progress and was inspired by the NoCodeClarity Community. 
+**STX Tips** enables users to send and receive STX (Stacks) tips via Twitter replies by interacting with a secure Clarity smart contract on the Stacks blockchain. Users can connect their Stacks wallets directly through the landing page, simplifying the process of sending tips. 
+
+**This is an active work in progress and was inspired by the NoCodeClarity Community.**
 
 The URL is https://x.com/STXTipBot.
 
