@@ -21,3 +21,5 @@
     (asserts! (is-eq tx-sender (var-get tip-bot-address)) (err u101))
     ;; Transfer the specified amount of STX to the recipient
     (stx-transfer? amount tx-sender recipient)))
+
+;; Contract deployment link: https://explorer.hiro.so/txid/0xff2af96bce18b2eed2a2806cf9b4411f2c66a3e90fbdd88969ed6f1b6fcfe02d?chain=mainnet 
